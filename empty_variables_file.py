@@ -1,0 +1,5 @@
+host =''
+user = ''
+password = ''
+database = ''
+noteb_api_key = ''
