@@ -16,7 +16,7 @@ def main():
 
 		from variables import noteb_api_key
 		api_data = Get_api_data(model_id, noteb_api_key)
-		print(json.dumps(api_data, indent=4))
+		#print(json.dumps(api_data, indent=4))
 
 
 		if api_data['code'] == 30:
@@ -24,12 +24,13 @@ def main():
 			Wait()
 			continue
 
-		else if not api_data['result']:
-			print("The ID exists in the noteb database but there is no data associated with it.")
+		elif not api_data['result']:
+			print("The ID exists in the noteb database but there is no data associated with it. Therefore this one will be skipped.")
 			Wait()
 			continue
 
-		else
+		else:
+			print("Laptop found")
 			laptop = Make_data_into_a_dictionary(api_data['result']['0'], model_id)
 			Write_to_database(laptop)
 			Wait()
