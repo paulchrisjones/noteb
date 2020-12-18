@@ -4,16 +4,17 @@ import requests
 import mysql.connector
 from mysql.connector import Error
 
-seconds_to_wait_between_requests = 15 #to avoid hammering noteb and your own database	
-number_of_requests_to_make = 1000 #noteb gives you 1000 requests per day
-using_public_api_key = False
+seconds_to_wait_between_requests = 1 #to avoid hammering noteb and your own database	
+number_of_requests_to_make = 500 #noteb gives you 1000 requests per day
 
 def main():
+
+	using_public_api_key = False
 
 	for _ in " " * number_of_requests_to_make:
 
 		model_id = Get_model_id_from_save_file()
-
+		using_public_api_key = using_public_api_key
 		if using_public_api_key:
 			noteb_api_key = '112233aabbcc'
 		else:
@@ -121,6 +122,7 @@ def Write_to_database(laptop_data):
 
 	except Error as e:
 		print(e)
+		exit()
 
 	finally:
 		if conn is not None and conn.is_connected():
